@@ -14,7 +14,7 @@ export default function App() {
   const _ionicons = Object.entries<string>(ionicons).map(
     (x: [string, string]): [string, SvgFile] => {
       const name = x[0].replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
-      return [name, { file: `/node_modules/ionicons/dist/svg/${name}.svg` }];
+      return [name, { file: `https://unpkg.com/ionicons@7.1.0/dist/ionicons/svg/${name}.svg` }];
     }
   );
 
