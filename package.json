@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Nebular React Demo",
   "repository": "https://github.com/hirol888/nebular-react-demo",
-  "author": "Huining Li <hiro.l.dragon@gmail.com>",
+  "author": "Huining Li <nebularreact@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "vite",
