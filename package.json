@@ -7,7 +7,7 @@
   "author": "Huining Li <nebularreact@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
