@@ -1,6 +1,6 @@
 import { Card, useNebularTheme } from '@nebular-react/core';
 import React from 'react';
-import ReactECharts from 'echarts-for-react';
+import ReactECharts, { EChartsOption } from 'echarts-for-react';
 import * as echarts from 'echarts';
 import * as map from './world.json';
 import useStyles from './BubbleMaps.styles';
@@ -451,7 +451,7 @@ const _BubbleMapsDemo = React.forwardRef<ReactECharts, React.ComponentPropsWitho
       }
     });
 
-    const option = {
+    const option: EChartsOption = {
       title: {
         text: 'World Population (2011)',
         left: 'center',

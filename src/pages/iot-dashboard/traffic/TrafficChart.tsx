@@ -1,6 +1,6 @@
 import React from 'react';
 import * as echarts from 'echarts';
-import ReactECharts from 'echarts-for-react';
+import ReactECharts, { EChartsOption } from 'echarts-for-react';
 import { useNebularTheme } from '@nebular-react/styles';
 import { EChartWithResize } from '../../../components/echarts-with-resize/EChartsWithResize';
 
@@ -10,7 +10,7 @@ const _TrafficChart = React.forwardRef<ReactECharts, React.ComponentPropsWithout
 
     const points: number[] = [300, 520, 435, 530, 730, 620, 660, 860];
 
-    const option = {
+    const option: EChartsOption = {
       grid: {
         left: 0,
         top: 0,
@@ -37,7 +37,7 @@ const _TrafficChart = React.forwardRef<ReactECharts, React.ComponentPropsWithout
           show: true,
           lineStyle: {
             color: theme.variables.separator,
-            width: '1'
+            width: 1
           }
         }
       },
@@ -65,20 +65,14 @@ const _TrafficChart = React.forwardRef<ReactECharts, React.ComponentPropsWithout
           sampling: 'average',
           silent: true,
           itemStyle: {
-            normal: {
-              color: 'rgba(0, 0, 0, 0)'
-            },
-            emphasis: {
-              color: 'rgba(0,0,0,0)',
-              borderColor: 'rgba(0,0,0,0)',
-              borderWidth: 0
-            }
+            color: 'rgba(0, 0, 0, 0)',
+            borderColor: 'rgba(0,0,0,0)',
+            borderWidth: 0
           },
           lineStyle: {
-            normal: {
-              width: 2,
-              color: 'rgba(0, 0, 0, 0)'
-            }
+            width: 2,
+            color: 'rgba(0, 0, 0, 0)'
+
           },
           data: points.map((p) => p - 15)
         },
@@ -88,39 +82,33 @@ const _TrafficChart = React.forwardRef<ReactECharts, React.ComponentPropsWithout
           symbolSize: 6,
           sampling: 'average',
           itemStyle: {
-            normal: {
-              color: theme.variables.borderColor4,
-              borderColor: theme.variables.borderColor4,
-              borderWidth: 2
-            },
-            emphasis: {
-              color: 'white',
-              borderColor: theme.variables.primary,
-              borderWidth: 2
-            }
+
+            color: theme.variables.borderColor4,
+            borderColor: theme.variables.borderColor4,
+            borderWidth: 2
+
           },
           lineStyle: {
-            normal: {
-              width: 2,
-              color: theme.variables.borderColor4,
-              shadowColor: theme.variables.borderColor4,
-              shadowBlur: '1'
-            }
+
+            width: 2,
+            color: theme.variables.borderColor4,
+            shadowColor: theme.variables.borderColor4,
+            shadowBlur: 1
           },
           areaStyle: {
-            normal: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: theme.variables.bg2
-                },
-                {
-                  offset: 1,
-                  color: theme.variables.bg2
-                }
-              ]),
-              opacity: 1
-            }
+
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: theme.variables.bg2
+              },
+              {
+                offset: 1,
+                color: theme.variables.bg2
+              }
+            ]),
+            opacity: 1
+
           },
           data: points
         }

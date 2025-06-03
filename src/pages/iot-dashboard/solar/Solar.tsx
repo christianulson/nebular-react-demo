@@ -1,7 +1,7 @@
 import { Card, useNebularTheme } from '@nebular-react/core';
 import React from 'react';
 import * as echarts from 'echarts';
-import ReactECharts from 'echarts-for-react';
+import ReactECharts, { EChartsOption } from 'echarts-for-react';
 import { EChartWithResize } from '../../../components/echarts-with-resize/EChartsWithResize';
 import useStyles from './Solar.styles';
 
@@ -12,7 +12,7 @@ const _Solar = React.forwardRef<ReactECharts, React.ComponentPropsWithoutRef<'di
 
     const value = 42;
 
-    const option = {
+    const option: EChartsOption = {
       tooltip: {
         trigger: 'item',
         formatter: '{a} <br/>{b} : {c} ({d}%)'
@@ -20,8 +20,8 @@ const _Solar = React.forwardRef<ReactECharts, React.ComponentPropsWithoutRef<'di
       series: [
         {
           name: ' ',
-          clockWise: true,
-          hoverAnimation: false,
+          clockwise: true,
+          //hoverAnimation: false,
           type: 'pie',
           center: ['45%', '50%'],
           radius: ['80%', '90%'],
@@ -30,63 +30,55 @@ const _Solar = React.forwardRef<ReactECharts, React.ComponentPropsWithoutRef<'di
               value,
               name: ' ',
               label: {
-                normal: {
-                  position: 'center',
-                  formatter: '{d}%',
-                  textStyle: {
-                    fontSize: '22',
-                    fontFamily: theme.variables.fontSecondary,
-                    fontWeight: '600',
-                    color: theme.variables.fgHeading
-                  }
-                }
-              },
-              tooltip: {
-                show: false
+                //normal: {
+                position: 'center',
+                formatter: '{d}%',
+
+                // fontSize: '22',
+                // fontFamily: theme.variables.fontSecondary,
+                // fontWeight: '600',
+                // color: theme.variables.fgHeading
+
+                //}
               },
               itemStyle: {
-                normal: {
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    {
-                      offset: 0,
-                      color: theme.variables.primary
-                    },
-                    {
-                      offset: 1,
-                      color: theme.variables.primary
-                    }
-                  ]),
-                  shadowColor: 'rgba(0, 0, 0, 0)',
-                  shadowBlur: 0,
-                  shadowOffsetX: 0,
-                  shadowOffsetY: 3
-                }
-              },
-              hoverAnimation: false
+
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: theme.variables.primary
+                  },
+                  {
+                    offset: 1,
+                    color: theme.variables.primary
+                  }
+                ]),
+                shadowColor: 'rgba(0, 0, 0, 0)',
+                shadowBlur: 0,
+                shadowOffsetX: 0,
+                shadowOffsetY: 3
+              }
             },
             {
               value: 100 - value,
               name: ' ',
-              tooltip: {
-                show: false
-              },
               label: {
-                normal: {
-                  position: 'inner'
-                }
+
+                position: 'inner'
+
               },
               itemStyle: {
-                normal: {
-                  color: theme.variables.bg2
-                }
+
+                color: theme.variables.bg2
+
               }
             }
           ]
         },
         {
           name: ' ',
-          clockWise: true,
-          hoverAnimation: false,
+          clockwise: true,
+
           type: 'pie',
           center: ['45%', '50%'],
           radius: ['80%', '90%'],
@@ -95,47 +87,42 @@ const _Solar = React.forwardRef<ReactECharts, React.ComponentPropsWithoutRef<'di
               value,
               name: ' ',
               label: {
-                normal: {
-                  position: 'inner',
-                  show: false
-                }
-              },
-              tooltip: {
+
+                position: 'inner',
                 show: false
+
               },
+
               itemStyle: {
-                normal: {
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    {
-                      offset: 0,
-                      color: theme.variables.primary
-                    },
-                    {
-                      offset: 1,
-                      color: theme.variables.primary
-                    }
-                  ]),
-                  shadowColor: 'rgba(0, 0, 0, 0)',
-                  shadowBlur: 7
-                }
-              },
-              hoverAnimation: false
+
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: theme.variables.primary
+                  },
+                  {
+                    offset: 1,
+                    color: theme.variables.primary
+                  }
+                ]),
+                shadowColor: 'rgba(0, 0, 0, 0)',
+                shadowBlur: 7
+
+              }
+
             },
             {
               value: 28,
               name: ' ',
-              tooltip: {
-                show: false
-              },
               label: {
-                normal: {
-                  position: 'inner'
-                }
+
+                position: 'inner'
+
               },
               itemStyle: {
-                normal: {
-                  color: 'none'
-                }
+
+                color: 'none'
+
               }
             }
           ]
