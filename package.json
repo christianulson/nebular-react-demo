@@ -32,7 +32,7 @@
     "echarts": "^5.6.0",
     "echarts-for-react": "^3.0.3",
     "google-maps-react": "^2.0.6",
-    "ionicons": "^7.4.0",
+    "ionicons": "^8.0.13",
     "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
