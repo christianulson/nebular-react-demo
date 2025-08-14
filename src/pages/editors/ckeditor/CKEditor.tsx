@@ -11,7 +11,7 @@ export function CKEditorDemo() {
     <Card size="large" className={cx(classes.root)}>
       <Card.Header>CKEditor</Card.Header>
       <Card.Body>
-        <CKEditor editor={ClassicEditor} />
+        {/* <CKEditor editor={ClassicEditor} /> */}
       </Card.Body>
     </Card>
   );

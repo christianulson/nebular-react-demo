@@ -1,7 +1,7 @@
 import { useNebularTheme } from '@nebular-react/styles';
 import React, { useMemo } from 'react';
 import * as echarts from 'echarts';
-import ReactECharts from 'echarts-for-react';
+import ReactECharts, { EChartsOption } from 'echarts-for-react';
 import { EChartWithResize } from '../../../../components/echarts-with-resize/EChartsWithResize';
 import useStyles from './ElectricityChart.styles';
 
@@ -25,7 +25,7 @@ const _ElectricityChart = React.forwardRef<ReactECharts, React.ComponentPropsWit
       []
     );
 
-    const option = {
+    const option: EChartsOption = {
       grid: {
         left: 0,
         top: 0,
@@ -38,7 +38,7 @@ const _ElectricityChart = React.forwardRef<ReactECharts, React.ComponentPropsWit
           type: 'line',
           lineStyle: {
             color: theme.variables.fgText,
-            width: '0'
+            width: 0
           }
         },
         textStyle: {
@@ -68,7 +68,7 @@ const _ElectricityChart = React.forwardRef<ReactECharts, React.ComponentPropsWit
         axisLine: {
           lineStyle: {
             color: theme.variables.borderColor3,
-            width: '2'
+            width: 2
           }
         }
       },
@@ -87,7 +87,7 @@ const _ElectricityChart = React.forwardRef<ReactECharts, React.ComponentPropsWit
           show: true,
           lineStyle: {
             color: theme.variables.separator,
-            width: '1'
+            width: 1
           }
         }
       },
@@ -97,48 +97,47 @@ const _ElectricityChart = React.forwardRef<ReactECharts, React.ComponentPropsWit
           smooth: true,
           symbolSize: 20,
           itemStyle: {
-            normal: {
-              opacity: 0
-            },
-            emphasis: {
-              color: '#ffffff',
-              borderColor: theme.variables.primary,
-              borderWidth: 2,
-              opacity: 1
-            }
+
+            opacity: 0,
+
+            color: '#ffffff',
+            borderColor: theme.variables.primary,
+            borderWidth: 2,
+
+
           },
           lineStyle: {
-            normal: {
-              width: '4',
-              type: 'solid',
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: theme.variables.primary
-                },
-                {
-                  offset: 1,
-                  color: theme.variables.primary
-                }
-              ]),
-              shadowColor: 'rgba(0, 0, 0, 0)',
-              shadowBlur: 6,
-              shadowOffsetY: 12
-            }
+
+            width: 4,
+            type: 'solid',
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: theme.variables.primary
+              },
+              {
+                offset: 1,
+                color: theme.variables.primary
+              }
+            ]),
+            shadowColor: 'rgba(0, 0, 0, 0)',
+            shadowBlur: 6,
+            shadowOffsetY: 12
+
           },
           areaStyle: {
-            normal: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: theme.variables.bg2
-                },
-                {
-                  offset: 1,
-                  color: theme.variables.bg2
-                }
-              ])
-            }
+
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: theme.variables.bg2
+              },
+              {
+                offset: 1,
+                color: theme.variables.bg2
+              }
+            ])
+
           },
           data: chartData.map((i) => i.value)
         },
@@ -148,23 +147,23 @@ const _ElectricityChart = React.forwardRef<ReactECharts, React.ComponentPropsWit
           smooth: true,
           symbol: 'none',
           lineStyle: {
-            normal: {
-              width: '4',
-              type: 'solid',
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: theme.variables.primary
-                },
-                {
-                  offset: 1,
-                  color: theme.variables.primary
-                }
-              ]),
-              shadowColor: 'rgba(0, 0, 0, 0)',
-              shadowBlur: 14,
-              opacity: 1
-            }
+
+            width: 4,
+            type: 'solid',
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: theme.variables.primary
+              },
+              {
+                offset: 1,
+                color: theme.variables.primary
+              }
+            ]),
+            shadowColor: 'rgba(0, 0, 0, 0)',
+            shadowBlur: 14,
+            opacity: 1
+
           },
           data: chartData.map((i) => i.value)
         }

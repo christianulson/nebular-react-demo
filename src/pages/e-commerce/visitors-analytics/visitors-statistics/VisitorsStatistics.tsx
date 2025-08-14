@@ -22,7 +22,7 @@ const _VisitorsStatistics = React.forwardRef<ReactECharts, React.ComponentPropsW
       }
     ];
 
-    const option = {
+    const option: echarts.EChartsOption = {
       tooltip: {
         trigger: 'item',
         formatter: ''
@@ -30,8 +30,8 @@ const _VisitorsStatistics = React.forwardRef<ReactECharts, React.ComponentPropsW
       series: [
         {
           name: ' ',
-          clockWise: true,
-          hoverAnimation: false,
+          clockwise: true,
+          //hoverAnimation: false,
           type: 'pie',
           center: ['50%', '50%'],
           radius: ['70%', '90%'],
@@ -40,63 +40,63 @@ const _VisitorsStatistics = React.forwardRef<ReactECharts, React.ComponentPropsW
               value: 75,
               name: ' ',
               label: {
-                normal: {
-                  position: 'center',
-                  formatter: '',
-                  textStyle: {
-                    fontSize: '22',
-                    fontFamily: theme.variables.fontSecondary,
-                    fontWeight: '600',
-                    color: theme.variables.fgHeading
-                  }
-                }
+                //normal: {
+                position: 'center',
+                formatter: '',
+                //textStyle: {
+                // fontSize: '22',
+                // fontFamily: theme.variables.fontSecondary,
+                // fontWeight: '600',
+                // color: theme.variables.fgHeading
+                //}
+                //}
               },
-              tooltip: {
-                show: false
-              },
+              // tooltip: {
+              //   show: false
+              // },
               itemStyle: {
-                normal: {
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    {
-                      offset: 0,
-                      color: theme.variables.success
-                    },
-                    {
-                      offset: 1,
-                      color: theme.variables.success
-                    }
-                  ]),
-                  shadowColor: 'rgba(0, 0, 0, 0)',
-                  shadowBlur: 0,
-                  shadowOffsetX: 0,
-                  shadowOffsetY: 3
-                }
+                // normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: theme.variables.success
+                  },
+                  {
+                    offset: 1,
+                    color: theme.variables.success
+                  }
+                ]),
+                shadowColor: 'rgba(0, 0, 0, 0)',
+                shadowBlur: 0,
+                shadowOffsetX: 0,
+                shadowOffsetY: 3
+                //}
               },
-              hoverAnimation: false
+              // hoverAnimation: false
             },
             {
               value: 25,
               name: ' ',
-              tooltip: {
-                show: false
-              },
+              // tooltip: {
+              //   show: false
+              // },
               label: {
-                normal: {
-                  position: 'inner'
-                }
+                // normal: {
+                position: 'inner'
+                //}
               },
               itemStyle: {
-                normal: {
-                  color: theme.variables.layoutBg
-                }
+                //normal: {
+                color: theme.variables.layoutBg
+                //}
               }
             }
           ]
         },
         {
           name: ' ',
-          clockWise: true,
-          hoverAnimation: false,
+          clockwise: true,
+          //hoverAnimation: false,
           type: 'pie',
           center: ['50%', '50%'],
           radius: ['60%', '97%'],
@@ -105,55 +105,55 @@ const _VisitorsStatistics = React.forwardRef<ReactECharts, React.ComponentPropsW
               value: 75,
               name: ' ',
               label: {
-                normal: {
-                  position: 'center',
-                  formatter: '',
-                  textStyle: {
-                    fontSize: '22',
-                    fontFamily: theme.variables.fontSecondary,
-                    fontWeight: '600',
-                    color: theme.variables.fgHeading
-                  }
-                }
+                // normal: {
+                position: 'center',
+                formatter: '',
+                // textStyle: {
+                //   fontSize: '22',
+                //   fontFamily: theme.variables.fontSecondary,
+                //   fontWeight: '600',
+                //   color: theme.variables.fgHeading
+                // }
+                // }
               },
-              tooltip: {
-                show: false
-              },
+              // tooltip: {
+              //   show: false
+              // },
               itemStyle: {
-                normal: {
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1)
-                }
+                // normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1)
+                // }
               },
-              hoverAnimation: false
+              //hoverAnimation: false
             },
             {
               value: 25,
               name: ' ',
-              tooltip: {
-                show: false
-              },
+              // tooltip: {
+              //   show: false
+              // },
               label: {
-                normal: {
-                  position: 'inner'
-                }
+                //normal: {
+                position: 'inner'
+                //}
               },
               itemStyle: {
-                normal: {
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    {
-                      offset: 0,
-                      color: theme.variables.warning
-                    },
-                    {
-                      offset: 1,
-                      color: theme.variables.warningLight
-                    }
-                  ]),
-                  shadowColor: 'rgba(0, 0, 0, 0)',
-                  shadowBlur: 0,
-                  shadowOffsetX: '0',
-                  shadowOffsetY: '0'
-                }
+                // normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: theme.variables.warning
+                  },
+                  {
+                    offset: 1,
+                    color: theme.variables.warningLight
+                  }
+                ]),
+                // shadowColor: 'rgba(0, 0, 0, 0)',
+                // shadowBlur: 0,
+                // shadowOffsetX: '0',
+                // shadowOffsetY: '0'
+                //}
               }
             }
           ]
