@@ -14,16 +14,15 @@ Demo application for the [Nebular React](https://github.com/hirol888/nebular-rea
 - ESLint 9 (flat config, Airbnb Extended)
 - Vitest 5 + Testing Library + axe
 
-## Local library
+## Nebular React packages
 
-This demo consumes the library **from source** through Vite/TypeScript aliases:
+This demo consumes the published packages from npm:
 
-- `@nebular-react/core` → `../NebularCore/src/nebular-react-core/src`
-- `@nebular-react/hooks` → `../NebularCore/src/nebular-react-hooks/src`
-- `@nebular-react/styles` → `../NebularCore/src/nebular-react-styles/src`
+- `@nebular-react/core` `1.0.0`
+- `@nebular-react/hooks` `1.0.0`
+- `@nebular-react/styles` `1.0.0`
 
-That means changes in `NebularCore` are reflected by Vite HMR without rebuilding or publishing the
-packages. The sibling folder must exist next to this repository.
+Run `yarn install` to fetch them.
 
 ## Commands
 

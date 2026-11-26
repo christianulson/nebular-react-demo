@@ -30,5 +30,5 @@ yarn verify:full     # Full CI pipeline
 
 ## Dependencies
 
-- `@nebular-react/core`, `@nebular-react/hooks`, `@nebular-react/styles` — aliased to `../NebularCore/src` (live source, no publish needed)
+- `@nebular-react/core`, `@nebular-react/hooks`, `@nebular-react/styles` — npm packages pinned to `1.0.0`
 - React 19, Vite 8, TypeScript 7, ESLint 9, Vitest 5, Playwright

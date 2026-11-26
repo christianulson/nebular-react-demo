@@ -1,10 +1,14 @@
 import React from 'react';
 import { Moment } from 'moment';
-import { BaseCalendarCellProps } from '@nebular-react/core/lib/Calendar/calendar-kit/types';
 import { useDateFns } from '@nebular-react/hooks';
 import { createCalendarDayCellStyles, useCalendarPickerContext } from '@nebular-react/core';
 
-export function DayCell<TDate extends Date | Moment>(props: BaseCalendarCellProps<TDate>) {
+interface DayCellProps<TDate extends Date | Moment> {
+  date?: TDate;
+  onSelect?: (date: TDate) => void;
+}
+
+export function DayCell<TDate extends Date | Moment>(props: DayCellProps<TDate>) {
   const { date, onSelect } = props;
   const { locale, selectedValue, visibleDate, min, max, size, filter } =
     useCalendarPickerContext<TDate>();

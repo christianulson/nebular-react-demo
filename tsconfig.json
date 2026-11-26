@@ -15,13 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["vite/client", "vitest/globals"],
-    "paths": {
-      "@nebular-react/core": ["./../NebularCore/src/nebular-react-core/src"],
-      "@nebular-react/hooks": ["./../NebularCore/src/nebular-react-hooks/src"],
-      "@nebular-react/styles": ["./../NebularCore/src/nebular-react-styles/src"],
-      "@nebular-react/core/lib/*": ["./../NebularCore/src/nebular-react-core/src/*"]
-    }
+    "types": ["vite/client", "vitest/globals"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

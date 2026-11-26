@@ -2,8 +2,6 @@ import { defineConfig } from 'vitest/config';
 import * as path from 'path';
 import react from '@vitejs/plugin-react';
 
-const nebularCore = path.resolve(import.meta.dirname, '../NebularCore/src');
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
@@ -29,29 +27,8 @@ export default defineConfig({
       {
         find: /^react-dom\/client$/,
         replacement: path.resolve(import.meta.dirname, 'node_modules/react-dom/client.js')
-      },
-      {
-        find: /^@nebular-react\/core$/,
-        replacement: path.join(nebularCore, 'nebular-react-core/src')
-      },
-      {
-        find: /^@nebular-react\/core\/lib\/(.*)$/,
-        replacement: `${path.join(nebularCore, 'nebular-react-core/src')}/$1`
-      },
-      {
-        find: /^@nebular-react\/hooks$/,
-        replacement: path.join(nebularCore, 'nebular-react-hooks/src')
-      },
-      {
-        find: /^@nebular-react\/styles$/,
-        replacement: path.join(nebularCore, 'nebular-react-styles/src')
       }
     ]
-  },
-  server: {
-    fs: {
-      allow: [path.resolve(import.meta.dirname, '..')]
-    }
   },
   build: {
     commonjsOptions: {
@@ -106,11 +83,6 @@ export default defineConfig({
     exclude: ['**/node_modules/**', '**/dist/**', 'e2e/**'],
     setupFiles: ['./src/test/setup.ts'],
     css: false,
-    server: {
-      deps: {
-        inline: [/NebularCore/]
-      }
-    },
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'json-summary'],
