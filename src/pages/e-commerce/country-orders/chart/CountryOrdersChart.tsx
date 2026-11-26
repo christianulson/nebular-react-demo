@@ -114,6 +114,8 @@ const _CountryOrdersChart = React.forwardRef<ReactECharts, CountryOrdersChartPro
           }
         ]
       }),
+      // The chart is intentionally rebuilt only when the selected country changes.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       [countryId]
     );
 

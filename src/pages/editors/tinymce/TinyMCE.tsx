@@ -9,7 +9,10 @@ export function TinyMCEDemo() {
     <Card size="large">
       <Card.Header>Tiny MCE</Card.Header>
       <Card.Body>
-        <Editor init={{ height: `calc(${theme.card_height_large} - 5.5rem)` }} />
+        <Editor
+          licenseKey="gpl"
+          init={{ height: `calc(${theme.card_height_large} - 5.5rem)`, menubar: false }}
+        />
       </Card.Body>
     </Card>
   );

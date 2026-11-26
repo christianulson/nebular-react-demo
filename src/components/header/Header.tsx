@@ -44,7 +44,13 @@ export function Header({ toggleSidebar }: HeaderProps) {
     <div className={cx(classes.root)}>
       <div className="header-container">
         <div className="logo-container">
-          <a href="#" className="sidebar-toggle" onClick={toggleSidebar}>
+          <a
+            href="#"
+            className="sidebar-toggle"
+            aria-label="Toggle navigation"
+            title="Toggle navigation"
+            onClick={toggleSidebar}
+          >
             <Icon icon="menu-2-outline" />
           </a>
           <a className="logo" href="#">
@@ -68,8 +74,18 @@ export function Header({ toggleSidebar }: HeaderProps) {
           <Action component="div" className="control-item">
             <Search type="rotate-layout" />
           </Action>
-          <Action className="control-item" icon={<Icon icon="email-outline" />} />
-          <Action className="control-item" icon={<Icon icon="bell-outline" />} />
+          <Action
+            className="control-item"
+            aria-label="Messages"
+            title="Messages"
+            icon={<Icon icon="email-outline" />}
+          />
+          <Action
+            className="control-item"
+            aria-label="Notifications"
+            title="Notifications"
+            icon={<Icon icon="bell-outline" />}
+          />
           <Action className="user-action">
             <User ref={userMenuRef} />
             <ContextMenu triggerRef={userMenuRef}>

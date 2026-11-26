@@ -16,10 +16,20 @@ export function Footer() {
         2023
       </span>
       <div className="socials">
-        <a href="https://github.com/hirol888/nebular-react-demo" target="_blank" rel="noreferrer">
+        <a
+          href="https://github.com/hirol888/nebular-react-demo"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Nebular React demo on GitHub"
+        >
           <Icon icon="logo-github" pack="ion" />
         </a>
-        <a href="https://www.linkedin.com/in/huining-li-2b05ab26/" target="_blank" rel="noreferrer">
+        <a
+          href="https://www.linkedin.com/in/huining-li-2b05ab26/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Huining Li on LinkedIn"
+        >
           <Icon icon="logo-linkedin" pack="ion" />
         </a>
       </div>

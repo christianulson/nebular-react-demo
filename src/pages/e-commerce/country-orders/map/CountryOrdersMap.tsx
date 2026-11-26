@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useMemo } from 'react';
 import * as L from 'leaflet';
 import { MapContainer, ZoomControl } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 import { useNebularTheme } from '@nebular-react/core';
 import useStyles from './CountryOrderMap.styles';
 import * as cords from './countries.geo.json';
@@ -12,11 +13,13 @@ interface CountryOrdersMapProps {
 export const CountryOrdersMap = ({ onSelectFeature }: CountryOrdersMapProps) => {
   const theme = useNebularTheme();
   const { classes, cx } = useStyles();
-  const layers = useRef<any>();
-  const selectedCountry = useRef<any>();
+  const layers = useRef<any>(null);
+  const selectedCountry = useRef<any>(null);
 
   useEffect(() => {
     selectFeature(findFeatureLayerByCountryId('USA'));
+    // Initial selection only; the map instance owns subsequent interactions.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onEachFeature = (feature: GeoJSON.Feature<GeoJSON.Geometry>, layer: L.Layer) => {
@@ -86,6 +89,8 @@ export const CountryOrdersMap = ({ onSelectFeature }: CountryOrdersMapProps) => 
     return featureLayer || null;
   };
 
+  // The GeoJSON layer is created once and mutated by Leaflet afterwards.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   layers.current = useMemo(() => [createGeoJsonLayer()], []);
 
   return (

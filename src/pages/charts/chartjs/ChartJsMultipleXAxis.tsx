@@ -8,14 +8,12 @@ export function ChartJsMultipleXAxis() {
 
   ChartJS.register(Tooltip, Legend, PointElement, LineElement);
 
-  const random = () => Math.round(Math.random() * 100);
-
   const data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June'],
     datasets: [
       {
         label: 'dataset - big points',
-        data: [random(), random(), random(), random(), random(), random()],
+        data: [65, 59, 80, 81, 56, 55],
         borderColor: theme.variables.primary,
         backgroundColor: theme.variables.primary,
         fill: false,
@@ -26,7 +24,7 @@ export function ChartJsMultipleXAxis() {
       },
       {
         label: 'dataset - individual point sizes',
-        data: [random(), random(), random(), random(), random(), random()],
+        data: [28, 48, 40, 19, 86, 27],
         borderColor: theme.variables.dangerLight,
         backgroundColor: theme.variables.dangerLight,
         fill: false,
@@ -37,7 +35,7 @@ export function ChartJsMultipleXAxis() {
       },
       {
         label: 'dataset - large pointHoverRadius',
-        data: [random(), random(), random(), random(), random(), random()],
+        data: [15, 75, 20, 60, 45, 90],
         borderColor: theme.variables.info,
         backgroundColor: theme.variables.info,
         fill: false,
@@ -47,7 +45,7 @@ export function ChartJsMultipleXAxis() {
       },
       {
         label: 'dataset - large pointHitRadius',
-        data: [random(), random(), random(), random(), random(), random()],
+        data: [35, 25, 65, 45, 75, 55],
         borderColor: theme.variables.success,
         backgroundColor: theme.variables.success,
         fill: false,

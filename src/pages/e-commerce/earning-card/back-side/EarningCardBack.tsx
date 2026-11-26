@@ -139,7 +139,9 @@ export function EarningCardBack() {
             ]
           }
         ]
-      } as any),
+      }) as any,
+    // Theme tokens are stable for the lifetime of the demo page.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 

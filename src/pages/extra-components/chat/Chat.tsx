@@ -239,8 +239,7 @@ export function ChatDemo() {
       files: [
         {
           url: 'https://i.gifer.com/no.gif',
-          type: 'image/jpeg',
-          icon: false
+          type: 'image/jpeg'
         }
       ],
       sender: 'John Doe',

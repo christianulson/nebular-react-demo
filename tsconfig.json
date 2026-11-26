@@ -1,19 +1,27 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2022",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react-jsx",
+    "types": ["vite/client", "vitest/globals"],
+    "paths": {
+      "@nebular-react/core": ["./../NebularCore/src/nebular-react-core/src"],
+      "@nebular-react/hooks": ["./../NebularCore/src/nebular-react-hooks/src"],
+      "@nebular-react/styles": ["./../NebularCore/src/nebular-react-styles/src"],
+      "@nebular-react/core/lib/*": ["./../NebularCore/src/nebular-react-core/src/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

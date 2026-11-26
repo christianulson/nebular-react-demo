@@ -15,8 +15,6 @@ export function ChartJsBarHorizontal() {
 
   ChartJS.register(Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
-  const random = () => Math.round(Math.random() * 100);
-
   const data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June'],
     datasets: [
@@ -24,12 +22,12 @@ export function ChartJsBarHorizontal() {
         label: 'Dataset 1',
         backgroundColor: theme.variables.infoLight,
         borderWidth: 1,
-        data: [random(), random(), random(), random(), random(), random()]
+        data: [65, 59, 80, 81, 56, 55]
       },
       {
         label: 'Dataset 2',
         backgroundColor: theme.variables.successLight,
-        data: [random(), random(), random(), random(), random(), random()]
+        data: [28, 48, 40, 19, 86, 27]
       }
     ]
   };

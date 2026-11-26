@@ -113,7 +113,7 @@ export function TypographyDemo() {
       <div className="col-md-6 col-xxxl-4">
         <Card size="large">
           <Card.Header>Font Colors</Card.Header>
-          <Card.Body>
+          <Card.Body tabIndex={0} aria-label="Font color examples">
             <div className="colors">
               <div className="item text-heading">
                 <div className="color bg-heading" />
@@ -186,7 +186,7 @@ export function TypographyDemo() {
       <div className="col-md-6 col-xxxl-4">
         <Card size="large">
           <Card.Header>Alerts</Card.Header>
-          <Card.Body>
+          <Card.Body tabIndex={0} aria-label="Alert examples">
             <Alert>
               <strong>Heads up!</strong> This alert needs your attention, but it&quot;s not super
               important.

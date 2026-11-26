@@ -243,6 +243,8 @@ const _OrdersChart = React.forwardRef<ReactECharts, OrdersChartProps>(
         xAxis,
         series
       }));
+      // Chart options are rebuilt from current data when the period changes.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [period]);
 
     const getNewSeries = (series: any, linesData: number[][]) =>

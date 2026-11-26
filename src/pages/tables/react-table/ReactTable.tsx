@@ -1,101 +1,88 @@
 import { Button, Card, Icon, Input, Select } from '@nebular-react/core';
-import React, { useMemo } from 'react';
-import { Column, usePagination, useSortBy, useTable } from 'react-table';
+import React, { useMemo, useState } from 'react';
+import {
+  ColumnDef,
+  createPaginatedRowModel,
+  createSortedRowModel,
+  flexRender,
+  rowPaginationFeature,
+  rowSortingFeature,
+  sortFns,
+  SortingState,
+  tableFeatures,
+  useTable
+} from '@tanstack/react-table';
 import personData from './data.json';
 import useStyles from './ReactTable.styles';
 
+type Person = (typeof personData)[number];
+
+const features = tableFeatures({
+  rowSortingFeature,
+  rowPaginationFeature,
+  sortedRowModel: createSortedRowModel(),
+  paginatedRowModel: createPaginatedRowModel(),
+  sortFns
+});
+
 export function ReactTableDemo() {
-  const columns: Column[] = useMemo(
+  const columns = useMemo<ColumnDef<typeof features, Person>[]>(
     () => [
-      {
-        Header: 'ID',
-        accessor: 'id'
-      },
-      {
-        Header: 'First Name',
-        accessor: 'firstName'
-      },
-      {
-        Header: 'Last Name',
-        accessor: 'lastName'
-      },
-      {
-        Header: 'Username',
-        accessor: 'username'
-      },
-      {
-        Header: 'E-mail',
-        accessor: 'email'
-      },
-      {
-        Header: 'Age',
-        accessor: 'age'
-      }
+      { header: 'ID', accessorKey: 'id' },
+      { header: 'First Name', accessorKey: 'firstName' },
+      { header: 'Last Name', accessorKey: 'lastName' },
+      { header: 'Username', accessorKey: 'username' },
+      { header: 'E-mail', accessorKey: 'email' },
+      { header: 'Age', accessorKey: 'age' }
     ],
     []
   );
-  const data = useMemo(() => personData, []);
-
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headers,
-    prepareRow,
-    page,
-    canPreviousPage,
-    canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
-    nextPage,
-    previousPage,
-    setPageSize,
-    state: { pageIndex, pageSize }
-  } = useTable(
-    {
-      columns,
-      data
-    },
-    useSortBy,
-    usePagination
-  );
+  const [sorting, setSorting] = useState<SortingState>([]);
   const { classes, cx } = useStyles();
+
+  const table = useTable({
+    features,
+    data: personData,
+    columns,
+    state: { sorting },
+    onSortingChange: setSorting
+  });
+
+  const { pageIndex, pageSize } = table.state.pagination;
 
   return (
     <Card className={cx(classes.root)}>
-      <Card.Header>React Table</Card.Header>
+      <Card.Header>TanStack Table</Card.Header>
       <Card.Body>
         <div className="react-table-container">
-          <table {...getTableProps()}>
+          <table>
             <thead>
               <tr className="titles">
-                {headers.map((column) => (
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render('Header')}
+                {table.getHeaderGroups()[0]?.headers.map((header) => (
+                  <th key={header.id} onClick={header.column.getToggleSortingHandler()}>
+                    {flexRender(header.column.columnDef.header, header.getContext())}
                     <span className="sort-icon">
-                      {column.isSorted ? (
-                        column.isSortedDesc ? (
-                          <Icon icon="chevron-down-outline" />
-                        ) : (
-                          <Icon icon="chevron-up-outline" />
-                        )
+                      {header.column.getIsSorted() === 'desc' ? (
+                        <Icon icon="chevron-down-outline" />
+                      ) : null}
+                      {header.column.getIsSorted() === 'asc' ? (
+                        <Icon icon="chevron-up-outline" />
                       ) : null}
                     </span>
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody {...getTableBodyProps()}>
-              {page.map((row) => {
-                prepareRow(row);
-                return (
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => (
-                      <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                    ))}
-                  </tr>
-                );
-              })}
+            <tbody>
+              {table.getRowModel().rows.map((row) => (
+                <tr key={row.id}>
+                  {row.getAllCells().map((cell) => (
+                    <td key={cell.id}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </table>
           <div className="react-table-pagination">
@@ -103,32 +90,32 @@ export function ReactTableDemo() {
               <div className="react-table-page-link">
                 <Button
                   component="a"
-                  onClick={() => gotoPage(0)}
-                  disabled={!canPreviousPage}
+                  onClick={() => table.firstPage()}
+                  disabled={!table.getCanPreviousPage()}
                   prefixIcon={<Icon icon="arrowhead-left" pack="eva" />}
                 />
               </div>
               <div className="react-table-page-link">
                 <Button
                   component="a"
-                  onClick={() => previousPage()}
-                  disabled={!canPreviousPage}
+                  onClick={() => table.previousPage()}
+                  disabled={!table.getCanPreviousPage()}
                   prefixIcon={<Icon icon="arrow-ios-back" pack="eva" />}
                 />
               </div>
               <div className="react-table-page-link">
                 <Button
                   component="a"
-                  onClick={() => nextPage()}
-                  disabled={!canNextPage}
+                  onClick={() => table.nextPage()}
+                  disabled={!table.getCanNextPage()}
                   prefixIcon={<Icon icon="arrow-ios-forward" pack="eva" />}
                 />
               </div>
               <div className="react-table-page-link">
                 <Button
                   component="a"
-                  onClick={() => gotoPage(pageCount - 1)}
-                  disabled={!canNextPage}
+                  onClick={() => table.lastPage()}
+                  disabled={!table.getCanNextPage()}
                   prefixIcon={<Icon icon="arrowhead-right" pack="eva" />}
                 />
               </div>
@@ -136,7 +123,7 @@ export function ReactTableDemo() {
             <span>
               Page{' '}
               <strong>
-                {pageIndex + 1} of {pageOptions.length}
+                {pageIndex + 1} of {table.getPageCount()}
               </strong>
             </span>
             <span>|</span>
@@ -144,9 +131,9 @@ export function ReactTableDemo() {
             <Input
               type="number"
               defaultValue={pageIndex + 1}
-              onChange={(e) => {
-                const _page = e.target.value ? Number(e.target.value) - 1 : 0;
-                gotoPage(_page);
+              onChange={(event) => {
+                const page = event.target.value ? Number(event.target.value) - 1 : 0;
+                table.setPageIndex(page);
               }}
               style={{ width: '100px' }}
             />
@@ -154,7 +141,7 @@ export function ReactTableDemo() {
             <Select
               options={['10', '20', '30', '40', '50']}
               defaultSelected={pageSize.toString()}
-              onSelect={(value) => setPageSize(value)}
+              onSelect={(value) => table.setPageSize(Number(value as string))}
             />
           </div>
         </div>

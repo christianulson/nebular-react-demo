@@ -148,6 +148,8 @@ const _ProfitChart = React.forwardRef<ReactECharts, ProfitChartProps>(
         ...current,
         series
       }));
+      // Chart options are rebuilt from current data when the period changes.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [period]);
 
     const getNewSeries = (series: any, _data: number[][]) =>

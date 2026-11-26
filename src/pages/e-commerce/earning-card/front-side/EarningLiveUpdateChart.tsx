@@ -10,9 +10,8 @@ interface EarningLiveUpdateChartProps {
 
 const _EarningLiveUpdateChart = React.forwardRef<ReactECharts, EarningLiveUpdateChartProps>(
   ({ selectedCurrency }: EarningLiveUpdateChartProps, ref) => {
-    // eslint-disable-next-line no-spaced-func
     const [chartData, setChartData] = useState<{ value: (string | number)[] }[]>([]);
-    const intervalRef = useRef<ReturnType<typeof setInterval>>();
+    const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
     const currentDate = useRef<Date>(new Date());
     const currentValue = useRef<number>(Math.random() * 1000);
 
@@ -25,6 +24,8 @@ const _EarningLiveUpdateChart = React.forwardRef<ReactECharts, EarningLiveUpdate
 
     useEffect(() => {
       setChartData(getDefaultLiveChartData(150));
+      // Re-seed only when the selected currency changes.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedCurrency]);
 
     const generateRandomLiveChartData = () => {

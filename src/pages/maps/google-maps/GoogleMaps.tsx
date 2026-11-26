@@ -1,34 +1,26 @@
 import { Card } from '@nebular-react/core';
 import React from 'react';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import useStyles from './GoogleMaps.styles';
 
-function _GoogleMapsDemo(props) {
+const center = { lat: 51.678418, lng: 7.809007 };
+const markerPosition = { lat: 51.778418, lng: 7.909007 };
+const mapContainerStyle = { width: '100%', height: '32.85rem' };
+
+export default function GoogleMapsDemo() {
   const { classes, cx } = useStyles();
+  const { isLoaded } = useJsApiLoader({ googleMapsApiKey: 'your-api-key-here' });
 
   return (
     <Card className={cx(classes.root)} size="large">
       <Card.Header>Google Maps</Card.Header>
       <Card.Body>
-        <Map
-          zoom={8}
-          google={props.google}
-          initialCenter={{ lat: 51.678418, lng: 7.809007 }}
-          style={{ width: '100%', height: '32.85rem' }}
-          onReady={(mapProps, map) => {
-            const marker = new google.maps.Marker({
-              position: new google.maps.LatLng(51.778418, 7.909007),
-              title: 'Hello World!'
-            });
-
-            marker.setMap(map);
-          }}
-        />
+        {isLoaded ? (
+          <GoogleMap mapContainerStyle={mapContainerStyle} center={center} zoom={8}>
+            <MarkerF position={markerPosition} title="Hello World!" />
+          </GoogleMap>
+        ) : null}
       </Card.Body>
     </Card>
   );
 }
-
-export default GoogleApiWrapper({
-  apiKey: 'your-api-key-here'
-})(_GoogleMapsDemo);

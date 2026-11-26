@@ -8,3 +8,12 @@
 .ionicon-stroke-width {
   stroke-width: 32px;
 }
+
+.page-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 12rem;
+  color: var(--text-hint-color, #8f9bb3);
+  font-size: 0.875rem;
+}

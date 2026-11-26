@@ -15,73 +15,76 @@ class Track {
   cover: string;
 }
 
+const playList: Track[] = [
+  {
+    name: "Don't Wanna Fight",
+    artist: 'Alabama Shakes',
+    url: 'https://p.scdn.co/mp3-preview/6156cdbca425a894972c02fca9d76c0b70e001af',
+    cover: '/images/cover1.jpg'
+  },
+  {
+    name: 'Harder',
+    artist: 'Daft Punk',
+    url: 'https://p.scdn.co/mp3-preview/92a04c7c0e96bf93a1b1b1cae7dfff1921969a7b',
+    cover: '/images/cover2.jpg'
+  },
+  {
+    name: 'Come Together',
+    artist: 'Beatles',
+    url: 'https://p.scdn.co/mp3-preview/83090a4db6899eaca689ae35f69126dbe65d94c9',
+    cover: '/images/cover3.jpg'
+  }
+];
+
+function getRandomTrack(index: React.MutableRefObject<number>) {
+  index.current = Math.floor(Math.random() * playList.length);
+  return playList[index.current];
+}
+
 export function Player({ collapsed }: PlayerProps) {
-  const playList: Track[] = [
-    {
-      name: "Don't Wanna Fight",
-      artist: 'Alabama Shakes',
-      url: 'https://p.scdn.co/mp3-preview/6156cdbca425a894972c02fca9d76c0b70e001af',
-      cover: '/images/cover1.jpg'
-    },
-    {
-      name: 'Harder',
-      artist: 'Daft Punk',
-      url: 'https://p.scdn.co/mp3-preview/92a04c7c0e96bf93a1b1b1cae7dfff1921969a7b',
-      cover: '/images/cover2.jpg'
-    },
-    {
-      name: 'Come Together',
-      artist: 'Beatles',
-      url: 'https://p.scdn.co/mp3-preview/83090a4db6899eaca689ae35f69126dbe65d94c9',
-      cover: '/images/cover3.jpg'
-    }
-  ];
-
-  const getRandomTrack = () => {
-    index.current = Math.floor(Math.random() * playList.length);
-    return playList[index.current];
-  };
-
   const player = useRef<HTMLAudioElement>(new Audio());
   const index = useRef<number>(0);
-  const [track, setTrack] = useState<Track>(getRandomTrack());
+  const [track, setTrack] = useState<Track>(playList[0]);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>();
   const shuffle = useRef<boolean>(false);
   const { classes, cx } = useStyles();
   const forceUpdate = useForceUpdate();
+  const nextRef = useRef<() => void>(() => undefined);
 
   useEffect(() => {
-    player.current.onended = () => next();
+    const audio = player.current;
+    audio.onended = () => nextRef.current();
 
-    const updateCurrentTime = () => setCurrentTime(player.current.currentTime);
-    player.current.addEventListener('timeupdate', updateCurrentTime);
+    const updateCurrentTime = () => setCurrentTime(audio.currentTime);
+    audio.addEventListener('timeupdate', updateCurrentTime);
 
-    const updateDuration = () => setDuration(player.current.duration);
-    player.current.addEventListener('loadedmetadata', updateDuration);
+    const updateDuration = () => setDuration(audio.duration);
+    audio.addEventListener('loadedmetadata', updateDuration);
 
     return () => {
-      player.current.pause();
-      player.current.src = '';
-      player.current.load();
-      player.current.removeEventListener('timeupdate', updateCurrentTime);
-      player.current.removeEventListener('loadedmetadata', updateDuration);
+      audio.pause();
+      audio.src = '';
+      audio.load();
+      audio.removeEventListener('timeupdate', updateCurrentTime);
+      audio.removeEventListener('loadedmetadata', updateDuration);
     };
   }, []);
 
   useEffect(() => {
-    const { paused } = player.current;
-    player.current.src = track.url;
-    player.current.load();
+    const audio = player.current;
+    const { paused } = audio;
+    audio.src = track.url;
+    audio.load();
     if (!paused) {
-      player.current.play();
+      audio.play();
     }
   }, [track]);
 
   const prev = () => {
     if (!player.current.loop) {
       if (shuffle.current) {
-        setTrack({ ...getRandomTrack() });
+        setTrack({ ...getRandomTrack(index) });
       } else {
         if (index.current === 0) {
           index.current = playList.length - 1;
@@ -96,7 +99,7 @@ export function Player({ collapsed }: PlayerProps) {
   const next = () => {
     if (!player.current.loop) {
       if (shuffle.current) {
-        setTrack({ ...getRandomTrack() });
+        setTrack({ ...getRandomTrack(index) });
       } else {
         if (index.current === playList.length - 1) {
           index.current = 0;
@@ -107,6 +110,8 @@ export function Player({ collapsed }: PlayerProps) {
       }
     }
   };
+
+  nextRef.current = next;
 
   const playPause = () => {
     if (player.current.paused) {

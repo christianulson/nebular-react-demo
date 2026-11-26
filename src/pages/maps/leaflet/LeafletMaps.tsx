@@ -2,6 +2,7 @@ import { Card } from '@nebular-react/core';
 import React from 'react';
 import { MapContainer } from 'react-leaflet';
 import * as L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import useStyles from './LeafletMaps.styles';
 
 export function LeafletMapsDemo() {

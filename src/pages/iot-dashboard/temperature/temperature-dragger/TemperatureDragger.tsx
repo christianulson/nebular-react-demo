@@ -198,8 +198,8 @@ export function TemperatureDragger(props: TemperatureDraggerProps) {
        A ${2 * radius.current},${2 * radius.current}
        1 ${angle > Math.PI ? '1' : '0'} 0
        ${radius.current + radius.current * 2 * Math.sin(angle)},${
-        radius.current + radius.current * 2 * Math.cos(angle)
-      }
+         radius.current + radius.current * 2 * Math.cos(angle)
+       }
        Z`
     };
   };
@@ -318,10 +318,14 @@ export function TemperatureDragger(props: TemperatureDraggerProps) {
     return () => {
       window.removeEventListener('resize', invalidate);
     };
+    // The invalidation callback is intentionally captured on mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     invalidate();
+    // Redraw when the controlled value changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   const mouseDown = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {

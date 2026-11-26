@@ -19,6 +19,148 @@ export function PageMenu() {
         icon={<Icon icon="home-outline" />}
         to="/iot-dashboard"
       />
+      <MenuItem id="new-components" title="New Components" group>
+        <MenuItem
+          id="select-advanced"
+          title="Select & Autocomplete"
+          icon={<Icon icon="chevron-down-outline" />}
+          component={Link}
+          to="/components/select"
+        />
+        <MenuItem
+          id="data-grid"
+          title="DataGrid"
+          icon={<Icon icon="grid-outline" />}
+          component={Link}
+          to="/components/data-grid"
+        />
+        <MenuItem
+          id="advanced-forms"
+          title="Advanced Forms"
+          icon={<Icon icon="edit-2-outline" />}
+          component={Link}
+          to="/components/advanced-forms"
+        />
+        <MenuItem
+          id="display-components"
+          title="Display & Feedback"
+          icon={<Icon icon="layers-outline" />}
+          component={Link}
+          to="/components/display"
+        />
+        <MenuItem
+          id="overlay-components"
+          title="Overlays & Editor"
+          icon={<Icon icon="browser-outline" />}
+          component={Link}
+          to="/components/overlays"
+        />
+        <MenuItem
+          id="nebular-charts"
+          title="Nebular Charts"
+          icon={<Icon icon="pie-chart-outline" />}
+          component={Link}
+          to="/components/charts"
+        />
+        <MenuItem
+          id="advanced-charts"
+          title="Advanced Charts"
+          icon={<Icon icon="bar-chart-outline" />}
+          component={Link}
+          to="/components/charts-advanced"
+        />
+        <MenuItem
+          id="data-views"
+          title="Data Views"
+          icon={<Icon icon="list-outline" />}
+          component={Link}
+          to="/components/data-views"
+        />
+        <MenuItem
+          id="utilities"
+          title="Utilities & Feedback"
+          icon={<Icon icon="settings-2-outline" />}
+          component={Link}
+          to="/components/utilities"
+        />
+        <MenuItem
+          id="layout-kit"
+          title="Layout Kit"
+          icon={<Icon icon="grid-outline" />}
+          component={Link}
+          to="/components/layout-kit"
+        />
+        <MenuItem
+          id="content-kit"
+          title="Content Kit"
+          icon={<Icon icon="image-outline" />}
+          component={Link}
+          to="/components/content-kit"
+        />
+        <MenuItem
+          id="editors"
+          title="Editors & Diff"
+          icon={<Icon icon="text-outline" />}
+          component={Link}
+          to="/components/editors"
+        />
+        <MenuItem
+          id="form-builders"
+          title="Form Builders"
+          icon={<Icon icon="build-outline" />}
+          component={Link}
+          to="/components/form-builders"
+        />
+        <MenuItem
+          id="workspace"
+          title="Workspace & Collaboration"
+          icon={<Icon icon="briefcase-outline" />}
+          component={Link}
+          to="/components/workspace"
+        />
+        <MenuItem
+          id="media"
+          title="Media & Files"
+          icon={<Icon icon="film-outline" />}
+          component={Link}
+          to="/components/media"
+        />
+        <MenuItem
+          id="scheduling"
+          title="Scheduling"
+          icon={<Icon icon="calendar-outline" />}
+          component={Link}
+          to="/components/scheduling"
+        />
+        <MenuItem
+          id="insights"
+          title="Insights & Diagnostics"
+          icon={<Icon icon="activity-outline" />}
+          component={Link}
+          to="/components/insights"
+        />
+        <MenuItem
+          id="charts-more"
+          title="More Charts"
+          icon={<Icon icon="bar-chart-outline" />}
+          component={Link}
+          to="/components/charts-more"
+        />
+        <MenuItem
+          id="i18n"
+          title="Internationalization"
+          icon={<Icon icon="globe-outline" />}
+          component={Link}
+          to="/components/i18n"
+        />
+        <MenuItem
+          id="components-lab"
+          title="Components Lab"
+          icon={<Icon icon="flask-outline" />}
+          component={Link}
+          to="/components/lab"
+        />
+      </MenuItem>
       <MenuItem id="features" title="Features" group>
         <MenuItem id="layout" title="Layout" icon={<Icon icon="layout-outline" />}>
           <MenuItem id="stepper" title="Stepper" component={Link} to="/layout/stepper" />

@@ -88,6 +88,8 @@ export function RoomSelector() {
         }
         return 0;
       }),
+    // The SVG room map is static; only the selected room changes the result.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [selectedRoom]
   );
 

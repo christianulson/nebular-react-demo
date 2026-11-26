@@ -1,7 +1,20 @@
 import { Badge, Card, Icon, Tabset } from '@nebular-react/core';
-import React from 'react';
+import React, { useState } from 'react';
 
 export function TabsDemo() {
+  const [tabs, setTabs] = useState(['Users', 'Orders', 'Transactions']);
+  const [activeTab, setActiveTab] = useState(0);
+
+  const closeTab = (index: number) => {
+    setTabs((current) => current.filter((_, tabIndex) => tabIndex !== index));
+    setActiveTab((current) => {
+      if (index < current) {
+        return current - 1;
+      }
+      return Math.min(current, Math.max(0, tabs.length - 2));
+    });
+  };
+
   return (
     <div className="row">
       <div className="col-md-12 col-lg-6">
@@ -302,6 +315,47 @@ export function TabsDemo() {
               <span>Content #3</span>
             </Tabset.Tab>
           </Tabset>
+        </Card>
+      </div>
+      <div className="col-md-12 col-lg-6">
+        <Card size="small">
+          <Card.Header>Closable tabs</Card.Header>
+          <Card.Body>
+            <Tabset
+              activeTabIndex={activeTab}
+              onTabChange={setActiveTab}
+              onTabClose={closeTab}
+              ariaLabel="Closable tabs"
+            >
+              {tabs.map((title) => (
+                <Tabset.Tab key={title} title={title} closable>
+                  <p>
+                    Content for <strong>{title}</strong>
+                  </p>
+                </Tabset.Tab>
+              ))}
+            </Tabset>
+          </Card.Body>
+        </Card>
+      </div>
+
+      <div className="col-md-12 col-lg-6">
+        <Card size="small">
+          <Card.Header>Keep mounted</Card.Header>
+          <Card.Body>
+            <Tabset keepMounted ariaLabel="Keep mounted tabs">
+              <Tabset.Tab title="Draft">
+                <input
+                  aria-label="Draft title"
+                  defaultValue="Nebular draft"
+                  style={{ width: '100%' }}
+                />
+              </Tabset.Tab>
+              <Tabset.Tab title="Notes">
+                <p>Switch back to Draft and the input keeps its value.</p>
+              </Tabset.Tab>
+            </Tabset>
+          </Card.Body>
         </Card>
       </div>
     </div>
