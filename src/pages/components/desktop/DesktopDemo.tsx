@@ -12,10 +12,10 @@ import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   createDemoDesktopWindows,
-  demoDesktopApps,
   demoDesktopDisplays,
+  demoDesktopEmbeddedApps,
   demoDesktopWorkspaces
-} from './desktop-apps';
+} from './desktop-embedded-apps';
 
 const restAdapterExample = `const adapter = createRestLayoutAdapter({
   endpoint: '/api/desktop/layout',
@@ -117,7 +117,7 @@ export function DesktopDemo() {
               <Desktop
                 key={`${persistence}-${multiDisplay}-${layoutRevision}`}
                 ariaLabel="Embedded Nebular desktop demo"
-                apps={demoDesktopApps}
+                apps={demoDesktopEmbeddedApps}
                 defaultWindows={createDemoDesktopWindows(multiDisplay)}
                 layoutAdapter={layoutAdapter}
                 onLayoutStatusChange={({ status }) => setLayoutStatus(status)}

@@ -1,11 +1,13 @@
 import { Button, Desktop, Icon, type CommandPaletteAction } from '@nebular-react/core';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   createDemoDesktopWindows,
+  createDemoDesktopWindowsForApp,
   demoDesktopApps,
   demoDesktopNotifications,
-  demoDesktopWorkspaces
+  demoDesktopWorkspaces,
+  findDemoDesktopApp
 } from './desktop-apps';
 
 function DesktopExitAction({ onExit }: { onExit: () => void }) {
@@ -28,6 +30,11 @@ function DesktopExitAction({ onExit }: { onExit: () => void }) {
 
 export function DesktopMode() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const requestedApp = findDemoDesktopApp(searchParams.get('app'));
+  const defaultWindows = requestedApp
+    ? createDemoDesktopWindowsForApp(requestedApp)
+    : createDemoDesktopWindows();
 
   const commands: CommandPaletteAction[] = [
     {
@@ -42,13 +49,14 @@ export function DesktopMode() {
 
   return (
     <Desktop
+      key={requestedApp?.id ?? 'default'}
       fullscreen
       ariaLabel="Nebular React demo desktop"
       apps={demoDesktopApps}
-      defaultWindows={createDemoDesktopWindows()}
+      defaultWindows={defaultWindows}
       workspaces={demoDesktopWorkspaces}
       defaultWorkspace="main"
-      storageKey="nebular-demo-desktop-layout"
+      storageKey={requestedApp ? undefined : 'nebular-demo-desktop-layout'}
       commandPalette
       commands={commands}
       showOverview

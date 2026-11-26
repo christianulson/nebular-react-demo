@@ -77,4 +77,14 @@ test.describe('desktop mode', () => {
     await expect(window).toHaveCount(0);
     expect(pageErrors).toEqual([]);
   });
+
+  test('opens a demo page from the app deep link', async ({ page }) => {
+    await page.goto('/desktop?app=datagrid');
+
+    const window = page.getByRole('dialog', { name: 'DataGrid' });
+    await expect(window).toBeVisible();
+    await expect(window.getByRole('table', { name: 'Users' })).toBeVisible({
+      timeout: 20000
+    });
+  });
 });

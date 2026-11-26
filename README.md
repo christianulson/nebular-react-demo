@@ -56,6 +56,20 @@ src/
 Routes are lazy-loaded in `src/components/layouts/page-routes/PageRoutes.tsx`, so each demo page is
 its own chunk.
 
+## Desktop mode
+
+- `/components/desktop` — desktop embedded in the classic sidebar layout, configured through the
+  declarative `apps`/`defaultWindows` API with local/session storage layout adapters.
+- `/desktop` — fullscreen desktop shell with persisted layout, workspaces, command palette
+  (`Ctrl/Cmd+K`), overview and window keyboard shortcuts.
+- `/desktop?app=datagrid` - deep link that opens the requested demo app in its own window. It skips
+  layout persistence so the requested window is always visible.
+- Every classic demo route keeps working exactly as before; the desktop is an additional way to
+  open the same pages.
+- Cross-browser E2E is opt-in: install the browsers with
+  `npx playwright install firefox webkit` and set `PW_ALL_BROWSERS=1`
+  (`$env:PW_ALL_BROWSERS=1` on PowerShell) before `yarn test:e2e`.
+
 ## Component showcases
 
 The `New Components` section of the sidebar groups the showcases added for the latest library work:
