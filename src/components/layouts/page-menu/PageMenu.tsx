@@ -154,6 +154,13 @@ export function PageMenu() {
           to="/components/i18n"
         />
         <MenuItem
+          id="desktop-mode"
+          title="Desktop Mode"
+          icon={<Icon icon="monitor-outline" />}
+          component={Link}
+          to="/components/desktop"
+        />
+        <MenuItem
           id="components-lab"
           title="Components Lab"
           icon={<Icon icon="flask-outline" />}

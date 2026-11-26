@@ -22,6 +22,7 @@ const pages = [
   '/components/insights',
   '/components/charts-more',
   '/components/i18n',
+  '/components/desktop',
   '/components/lab',
   '/components/select',
   '/components/overlays',

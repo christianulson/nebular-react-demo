@@ -1,6 +1,5 @@
 import { Layout, Sidebar, SidebarRef, useNebularDir } from '@nebular-react/core';
 import React, { useRef } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { Footer } from '../../footer/Footer';
 import { Header } from '../../header/Header';
 import { PageMenu } from '../page-menu/PageMenu';
@@ -13,31 +12,29 @@ export function OneColumnLayout() {
   const toggleSidebar = () => sidebarRef.current?.toggle(true);
 
   return (
-    <BrowserRouter>
-      <Layout
-        windowMode
-        withScroll
-        header={
-          <Layout.Header fixed>
-            <Header toggleSidebar={toggleSidebar} />
-          </Layout.Header>
-        }
-        sidebars={
-          <Sidebar ref={sidebarRef} responsive right={dir === 'rtl'}>
-            <PageMenu />
-          </Sidebar>
-        }
-        columns={
-          <Layout.Column>
-            <PageRoutes />
-          </Layout.Column>
-        }
-        footer={
-          <Layout.Footer fixed>
-            <Footer />
-          </Layout.Footer>
-        }
-      />
-    </BrowserRouter>
+    <Layout
+      windowMode
+      withScroll
+      header={
+        <Layout.Header fixed>
+          <Header toggleSidebar={toggleSidebar} />
+        </Layout.Header>
+      }
+      sidebars={
+        <Sidebar ref={sidebarRef} responsive right={dir === 'rtl'}>
+          <PageMenu />
+        </Sidebar>
+      }
+      columns={
+        <Layout.Column>
+          <PageRoutes />
+        </Layout.Column>
+      }
+      footer={
+        <Layout.Footer fixed>
+          <Footer />
+        </Layout.Footer>
+      }
+    />
   );
 }

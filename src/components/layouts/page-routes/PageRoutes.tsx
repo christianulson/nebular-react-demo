@@ -262,6 +262,11 @@ const I18nDemo = React.lazy(() =>
     default: module.I18nDemo
   }))
 );
+const DesktopDemo = React.lazy(() =>
+  import('../../../pages/components/desktop/DesktopDemo').then((module) => ({
+    default: module.DesktopDemo
+  }))
+);
 
 export function PageRoutes() {
   return (
@@ -319,6 +324,7 @@ export function PageRoutes() {
         <Route path="/components/insights" element={<InsightsDemo />} />
         <Route path="/components/charts-more" element={<MoreChartsDemo />} />
         <Route path="/components/i18n" element={<I18nDemo />} />
+        <Route path="/components/desktop" element={<DesktopDemo />} />
         <Route path="/components/lab" element={<ComponentsLabDemo />} />
       </Routes>
     </React.Suspense>

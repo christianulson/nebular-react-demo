@@ -32,6 +32,7 @@ const routes = [
   { path: '/components/insights', text: 'TraceWaterfall' },
   { path: '/components/charts-more', text: 'BoxPlotChart' },
   { path: '/components/i18n', text: 'Global locale & messages' },
+  { path: '/components/desktop', text: 'Desktop embedded in the classic layout' },
   { path: '/components/lab', text: 'DashboardGrid' }
 ];
 
