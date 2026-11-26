@@ -1,13 +1,18 @@
 import {
   Button,
   Icon,
+  changeDirection,
+  changeTheme,
   useDesktopWindow,
+  useNebularDir,
   type DesktopApp,
+  type DesktopWindowState,
   type DesktopWorkspace,
   type NotificationItem
 } from '@nebular-react/core';
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { AllThemes } from '../../../themes/AllThemes';
 
 const ECommerce = lazy(() =>
   import('../../e-commerce/ECommerce').then((module) => ({ default: module.ECommerce }))
@@ -72,7 +77,18 @@ function DesktopWelcome() {
   const { openWindow } = useDesktopWindow();
   const navigate = useNavigate();
   const location = useLocation();
+  const dir = useNebularDir();
+  const [dark, setDark] = useState(false);
   const isFullscreen = location.pathname === '/desktop';
+
+  const toggleTheme = () => {
+    const next = dark ? 'light' : 'dark';
+    const item = AllThemes.find((theme) => theme.name === next);
+    if (item) {
+      changeTheme(item.theme);
+      setDark(!dark);
+    }
+  };
 
   return (
     <div style={{ padding: '1rem', display: 'grid', gap: '0.75rem' }}>
@@ -88,11 +104,38 @@ function DesktopWelcome() {
         <Button size="small" appearance="outline" onClick={() => openWindow({ appId: 'i18n' })}>
           Open i18n
         </Button>
+        <Button size="small" appearance="outline" onClick={toggleTheme}>
+          Toggle theme
+        </Button>
+        <Button
+          size="small"
+          appearance="outline"
+          onClick={() => changeDirection(dir === 'rtl' ? 'ltr' : 'rtl')}
+        >
+          Toggle RTL
+        </Button>
         {!isFullscreen && (
           <Button size="small" appearance="outline" onClick={() => navigate('/desktop')}>
             Open fullscreen desktop
           </Button>
         )}
+      </div>
+      <div>
+        <strong>Keyboard shortcuts</strong>
+        <ul style={{ margin: '0.25rem 0 0 1.25rem', padding: 0 }}>
+          <li>
+            <code>Ctrl/Cmd+K</code> opens the command palette.
+          </li>
+          <li>
+            <code>Alt+Tab</code> cycles through open windows.
+          </li>
+          <li>
+            <code>Alt+Arrow</code> snaps the focused window; drag it to an edge for the same result.
+          </li>
+          <li>
+            <code>Ctrl/Cmd+Arrow</code> moves between workspaces.
+          </li>
+        </ul>
       </div>
     </div>
   );
@@ -412,13 +455,27 @@ export const demoDesktopNotifications: NotificationItem[] = [
   }
 ];
 
+export const demoDesktopDisplays = [
+  {
+    id: 'left',
+    label: 'Left display',
+    primary: true,
+    bounds: { x: 0, y: 0, width: 560, height: 480 }
+  },
+  {
+    id: 'right',
+    label: 'Right display',
+    bounds: { x: 560, y: 0, width: 560, height: 480 }
+  }
+];
+
 /**
  * Default windows shared by the embedded and the fullscreen demos.
  * The embedded page uses the declarative API (`defaultWindows`), while the
  * fullscreen route adds persistence and workspaces on top of it.
  */
-export function createDemoDesktopWindows() {
-  return [
+export function createDemoDesktopWindows(multiDisplay = false) {
+  const windows: DesktopWindowState[] = [
     {
       id: 'welcome-window',
       appId: 'welcome',
@@ -432,4 +489,22 @@ export function createDemoDesktopWindows() {
       zIndex: 1
     }
   ];
+
+  if (multiDisplay) {
+    windows.push({
+      id: 'explorer-window',
+      appId: 'explorer',
+      workspaceId: 'main',
+      displayId: 'right',
+      x: 620,
+      y: 72,
+      width: 520,
+      height: 420,
+      minimized: false,
+      maximized: false,
+      zIndex: 2
+    });
+  }
+
+  return windows;
 }

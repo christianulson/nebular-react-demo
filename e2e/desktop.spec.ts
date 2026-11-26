@@ -27,6 +27,37 @@ test.describe('desktop mode', () => {
     await expect(page.getByText('Nebular React Demo')).toBeVisible();
   });
 
+  test('switches the embedded desktop to multi-display', async ({ page }) => {
+    await page.goto('/components/desktop');
+
+    await page.getByRole('button', { name: 'Multi-display' }).click();
+
+    await expect(page.getByRole('dialog', { name: 'Demo Explorer' })).toBeVisible();
+    await expect(page.getByRole('dialog', { name: 'Welcome' })).toBeVisible();
+  });
+
+  test('toggles theme and RTL inside a desktop window', async ({ page }) => {
+    await page.goto('/desktop');
+
+    const readBackground = () =>
+      page.evaluate(() =>
+        getComputedStyle(document.documentElement).getPropertyValue('--background-basic-color-1')
+      );
+
+    const backgroundBefore = await readBackground();
+
+    await page.getByRole('button', { name: 'Toggle theme' }).click();
+
+    await expect.poll(readBackground).not.toBe(backgroundBefore);
+
+    await page.getByRole('button', { name: 'Toggle RTL' }).click();
+
+    const desktop = page.getByRole('region', { name: 'Nebular React demo desktop' });
+    await expect
+      .poll(() => desktop.evaluate((element) => element.closest('div[dir="rtl"]') !== null))
+      .toBe(true);
+  });
+
   test('opens a demo page inside a desktop window', async ({ page }) => {
     const pageErrors: string[] = [];
     page.on('pageerror', (error) => pageErrors.push(error.message));

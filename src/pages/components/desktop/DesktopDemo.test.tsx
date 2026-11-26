@@ -6,6 +6,11 @@ import { LightTheme } from '../../../themes/light.theme';
 import { DesktopDemo } from './DesktopDemo';
 
 describe('DesktopDemo', () => {
+  beforeEach(() => {
+    localStorage.clear();
+    sessionStorage.clear();
+  });
+
   it('renders the desktop inside the classic page and links to fullscreen', () => {
     render(
       <MemoryRouter>
