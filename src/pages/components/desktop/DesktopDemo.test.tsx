@@ -26,5 +26,6 @@ describe('DesktopDemo', () => {
     ).toBeInTheDocument();
     expect(screen.getByRole('dialog', { name: 'Welcome' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /launch fullscreen mode/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'REST adapter (mock)' })).toBeInTheDocument();
   });
 });

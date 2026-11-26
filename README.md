@@ -59,11 +59,23 @@ its own chunk.
 ## Desktop mode
 
 - `/components/desktop` — desktop embedded in the classic sidebar layout, configured through the
-  declarative `apps`/`defaultWindows` API with local/session storage layout adapters.
+  declarative `apps`/`defaultWindows` API with local/session storage layout adapters. It also offers
+  a **REST adapter (mock)** option that runs `createRestLayoutAdapter` against a fetch
+  implementation backed by localStorage, so load/save can be exercised without a real backend.
 - `/desktop` — fullscreen desktop shell with persisted layout, workspaces, command palette
-  (`Ctrl/Cmd+K`), overview and window keyboard shortcuts.
-- `/desktop?app=datagrid` - deep link that opens the requested demo app in its own window. It skips
+  (`Ctrl/Cmd+K`), overview and window keyboard shortcuts. Opening or focusing a window updates
+  `?app=<id>`, and switching workspaces updates `?workspace=<id>`, both with `replace`. The URL
+  always reflects the current context without remounting the desktop or breaking reloads: synced
+  URLs are marked in history state, so a reload restores the persisted layout instead of acting as
+  a fresh deep link.
+- `/desktop?app=datagrid` - deep link that opens the requested demo app in its own window. The
+  initial link is snapshotted, so later URL syncs do not replace the layout, and the deep link skips
   layout persistence so the requested window is always visible.
+- The fullscreen taskbar and command palette expose **Reset layout**, which clears the persisted
+  layout key, removes the synced `?app`/`?workspace` params (an initial deep link keeps its app)
+  and remounts the desktop with the default windows.
+- The Demo Explorer hides the desktop and explorer apps themselves, so it cannot nest another
+  desktop shell inside the current one.
 - Every classic demo route keeps working exactly as before; the desktop is an additional way to
   open the same pages.
 - Cross-browser E2E is opt-in: install the browsers with

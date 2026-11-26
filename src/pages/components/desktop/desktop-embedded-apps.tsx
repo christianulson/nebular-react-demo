@@ -230,7 +230,7 @@ function DemoExplorer() {
         }}
       >
         {apps
-          .filter((app) => app.id !== 'explorer')
+          .filter((app) => app.id !== 'explorer' && app.id !== 'desktop')
           .map((app) => (
             <Button
               key={app.id}

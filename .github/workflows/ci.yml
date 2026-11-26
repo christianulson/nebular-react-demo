@@ -24,3 +24,22 @@ jobs:
         run: yarn playwright install --with-deps chromium
       - name: Typecheck, lint, format, test, build and E2E
         run: yarn verify:full
+
+  cross-browser:
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PW_ALL_BROWSERS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Install Firefox and WebKit
+        run: yarn playwright install --with-deps firefox webkit
+      - name: Run E2E on Firefox and WebKit
+        run: yarn playwright test --workers=2

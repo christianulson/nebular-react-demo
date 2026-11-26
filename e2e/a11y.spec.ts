@@ -34,8 +34,9 @@ const pages = [
 
 for (const path of pages) {
   test(`has no critical accessibility violations on ${path}`, async ({ page }) => {
-    await page.goto(path);
-    await page.waitForLoadState('networkidle');
+    await page.goto(path, { waitUntil: 'domcontentloaded' });
+    await page.waitForFunction(() => (document.querySelector('#root')?.childElementCount ?? 0) > 0);
+    await page.waitForTimeout(1000);
 
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
