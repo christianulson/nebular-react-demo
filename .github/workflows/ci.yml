@@ -42,4 +42,4 @@ jobs:
       - name: Install Firefox and WebKit
         run: yarn playwright install --with-deps firefox webkit
       - name: Run E2E on Firefox and WebKit
-        run: yarn playwright test --workers=2
+        run: yarn playwright test --project=firefox --project=webkit --workers=2
